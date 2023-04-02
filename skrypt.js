@@ -1,0 +1,130 @@
+/*function obliczanieDniRoboczychMiedzyDatami(dzien1, miesiac1, rok1, dzien2, miesiac2, rok2){
+
+
+	if (miesiac1.toString().length == 1) {miesiac1 = "0" + miesiac1;}
+	if (dzien1.toString().length == 1) {dzien1 = "0" + dzien1;}
+	if (miesiac2.toString().length == 1) {miesiac2 = "0" + miesiac2;}
+	if (dzien2.toString().length == 1) {dzien2 = "0" + dzien2;}
+	
+	var oneDay = 86400000;
+	var firstDate = new Date(`${rok1}-${miesiac1}-${dzien1}`);
+	var secondDate = new Date(`${rok2}-${miesiac2}-${dzien2}`);
+	var diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+	
+	
+	var dniRobocze = 0;
+	
+	for (i = 0; i <= diffDays; i++) {
+		
+		var aktualnyDzienTygodnia = firstDate.getDay();
+		
+		if (aktualnyDzienTygodnia == 1 || aktualnyDzienTygodnia == 2 || aktualnyDzienTygodnia == 3 || aktualnyDzienTygodnia == 4 || aktualnyDzienTygodnia == 5) {
+			
+			dniRobocze = dniRobocze + 1;
+			
+		}
+		
+		firstDate.setDate(firstDate.getDate() + 1);
+		//firstDate = addDays(firstDate, 1);
+		
+		
+	}
+	
+	return dniRobocze;
+	
+	
+}*/
+
+
+
+
+function countWorkdays(startDate, endDate, holidays = []) {
+  let workdays = 0;
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  for (let date = start; date < end; date.setDate(date.getDate() + 1)) {
+    const dayOfWeek = date.getDay();
+    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+    const isHoliday = holidays.some(holiday => {
+      const h = new Date(holiday);
+      return h.getDate() === date.getDate() && h.getMonth() === date.getMonth() && h.getFullYear() === date.getFullYear();
+    });
+
+    if (!isWeekend && !isHoliday){
+      workdays++;
+    }
+  }
+
+  return workdays;
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+function odliczanieDoZakonczeniaRokuSzkolnego() {
+	
+	
+	var dataZakonczeniaRokuSzkolnego = new Date("June 23, 2023 08:00:00").getTime();
+	
+	var d = new Date();
+    var n = d.getTime();
+	
+	
+	var dzien = d.getDate();
+	var miesiac = d.getMonth();
+	miesiac = miesiac + 1;
+	var rok = d.getUTCFullYear();
+	
+	
+	var iloscMilisekundDoZakonczeniaRokuSzkolnego = dataZakonczeniaRokuSzkolnego - n;
+	
+	var iloscDni = Math.floor(iloscMilisekundDoZakonczeniaRokuSzkolnego / (1000 * 60 * 60 * 24));
+	var iloscGodzin = Math.floor((iloscMilisekundDoZakonczeniaRokuSzkolnego % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	var iloscMinut = Math.floor((iloscMilisekundDoZakonczeniaRokuSzkolnego % (1000 * 60 * 60)) / (1000 * 60));
+	var iloscSekund = Math.floor((iloscMilisekundDoZakonczeniaRokuSzkolnego % (1000 * 60)) / 1000);
+	
+	var pelnaIloscSekund = iloscMilisekundDoZakonczeniaRokuSzkolnego * 0.001;
+	pelnaIloscSekund = parseInt(pelnaIloscSekund);
+	
+	//var iloscDniDoZakonczeniaRokuSzkolnegoBezWeekendow = obliczanieDniRoboczychMiedzyDatami(dzien, miesiac, rok, 23, 6, 2023);
+	
+	var dniWolne = ['2023-04-09', '2023-04-10', '2023-05-01', '2023-05-03', '2023-05-28', '2023-06-08'];
+	var aktualnaData = Date.now();
+	var aktualnyMiesiac = new Date().getMonth() + 1;
+	
+	var iloscDniDoZakonczeniaRokuSzkolnegoBezWeekendow = countWorkdays(aktualnaData, '2023-06-23', dniWolne) - 1;
+	
+	var pozostalyProcentRokuSzkolego = 100 - (aktualnaData/1000 - 1661983200) / (1687471200 - 1661983200) * 100;
+	pozostalyProcentRokuSzkolego = pozostalyProcentRokuSzkolego.toFixed(4);
+	
+	
+	if (dataZakonczeniaRokuSzkolnego > aktualnaData && aktualnyMiesiac != 7 && aktualnyMiesiac != 8)
+	{
+	
+		document.getElementById("czasDoZakonczeniaRokuSzkolnego").innerHTML = `Do zakończenia roku szkolnego pozostało: ${iloscDni} dni ${iloscGodzin} godzin ${iloscMinut} minut ${iloscSekund} sekund`;
+		document.getElementById("czasDoZakonczeniaRokuSzkolnego_W_Sekundach").innerHTML = `Inczej mówiąc do zakończenia roku szkolnego pozostało ${pelnaIloscSekund} sekund`;
+		document.getElementById("iloscDniDoZakonczeniaRokuSzkolnegoBezWeekendow").innerHTML = `Do zakończenia roku szkolego bez weekendów i dni wolnych pozostało: ${iloscDniDoZakonczeniaRokuSzkolnegoBezWeekendow} dni`;
+		document.getElementById("pozostalyProcentRokuSzkolnego").innerHTML = `Pozostało jeszcze: ${pozostalyProcentRokuSzkolego}% roku szkolnego`;
+	}
+	
+	else
+	{
+		document.getElementById("czasDoZakonczeniaRokuSzkolnego").innerHTML = "Wakacje";
+		document.getElementById("czasDoZakonczeniaRokuSzkolnego_W_Sekundach").innerHTML = "";
+		document.getElementById("iloscDniDoZakonczeniaRokuSzkolnegoBezWeekendow").innerHTML = "";
+		document.getElementById("pozostalyProcentRokuSzkolnego").innerHTML = "";
+		
+	}
+	
+	setTimeout("odliczanieDoZakonczeniaRokuSzkolnego()",1000);
+	
+}
