@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #fff6e3;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 2px 2px #f16f6f;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.countdown-item {
+    text-align: center;
+    margin-right: 40px;
+    margin-bottom: 20px;
+}
+
+.countdown-item:last-of-type {
+    margin-right: 0;
+}
+
+.countdown-value {
+    font-size: 72px;
+    font-weight: bold;
+    color: #f16f6f;
+    text-shadow: 2px 2px #fff6e3;
+    margin-bottom: 10px;
+}
+
+.countdown-label {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #f16f6f;
+    text-shadow: 1px 1px #fff6e3;
+}
+
+.progress {
+    height: 30px;
+    background-color: #e0a366;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 15px;
+    width: 0%;
+    transition: width 0.5s ease-in-out;
+    background-image: linear-gradient(to right, #fcde67, #f16f6f);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 1px 1px #000;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 15px;
+    border: none;
+    color: #fff;
+    background-color: #f16f6f;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+button:last-of-type {
+    margin-right: 0;
+}
+
+button:hover {
+    background-color: #fcde67;
+}
+
+
+
+.countdown-info {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #FF9800;
+  margin-bottom: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.countdown-info #countdown-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #222;
+}
