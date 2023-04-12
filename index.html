@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Odliczanie do wakacji</title>
+
+</head>
+
+<body onload="odliczanieDoZakonczeniaRokuSzkolnego();">
+    <div class="container">
+	
+		<div id="czyWakacje"> <h1>Do wakacji pozostało:</h1> </div>
+        
+
+        <div class="countdown">
+            <div class="countdown-item">
+                <div class="countdown-value" id="days"></div>
+                <div class="countdown-label">dni</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="hours"></div>
+                <div class="countdown-label">godzin</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="minutes"></div>
+                <div class="countdown-label">minut</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-value" id="seconds"></div>
+                <div class="countdown-label">sekund</div>
+            </div>
+			
+			
+			
+        </div>
+		
+		<div class="countdown-item">
+			<div class="odliczanieIloscSekund" id="iloscSekundDoWakacji"></div>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar"></div>
+            <div class="progress-text"></div>
+        </div>
+
+    </div>
+
+
+
+	<div class="countdown-info">
+		<div id="iloscDniDoWakacjiBezWeekendow"></div>
+	</div>
+
+    <script src="skrypt.js"></script>
+	<link rel="stylesheet" href="style.css">
+
+</body>
+
+</html>
